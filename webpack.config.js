@@ -8,7 +8,7 @@ module.exports = (env) => {
   return {
     entry: "./src/app.js",
     output: {
-      path: path.join(__dirname, "public"),
+      path: path.join(__dirname, "public", "dist"),
       filename: "bundle.js",
     },
     module: {
@@ -46,6 +46,7 @@ module.exports = (env) => {
       historyApiFallback: true,
       host: "10.0.0.50",
       port: "8080",
+      publicPath: "/dist/",
     },
   };
 };
