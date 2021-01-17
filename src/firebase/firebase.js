@@ -37,18 +37,14 @@ database
     console.log("This failed", e);
   });
 
-// database.ref("age").set(28);
-// database.ref("location/city").set("New York City");
+// database.ref("isSingle").set(null);
 
-database
-  .ref("attributes")
-  .set({
-    height: "5'9",
-    weight: 184,
-  })
-  .then(() => {
-    console.log("Attributes saved!");
-  })
-  .catch((e) => {
-    console.log("Cannot save attributes", e);
-  });
+// database
+//   .ref()
+//   .remove()
+//   .then(() => {
+//     console.log("Remove succeeded");
+//   })
+//   .catch((e) => {
+//     console.log("Did not remove data", e);
+//   });
