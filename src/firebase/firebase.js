@@ -24,7 +24,11 @@ database
   .set({
     name: "Jacob Koppel",
     age: 27,
-    isSingle: true,
+    stressLevel: 6,
+    job: {
+      title: "Web Developer",
+      company: "Freelance",
+    },
     location: {
       city: "Spotswood",
       country: "United States",
@@ -37,7 +41,11 @@ database
     console.log("This failed", e);
   });
 
-// database.ref("isSingle").set(null);
+database.ref().update({
+  stressLevel: 9,
+  "job/company": "Amazon",
+  "location/city": "Seattle",
+});
 
 // database
 //   .ref()
