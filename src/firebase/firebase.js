@@ -17,9 +17,27 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-firebase
-  .database()
-  .ref()
-  .set({
-    name: "Jacob Koppel",
-  });
+const database = firebase.database();
+
+database.ref().set({
+  name: "Jacob Koppel",
+  age: 27,
+  isSingle: true,
+  location: {
+    city: "Spotswood",
+    country: "United States",
+  },
+  //   attributes: {
+  //     height: "5'9",
+  //     weight: 185,
+  //   },
+});
+
+// database.ref().set("This is my data");
+
+database.ref("age").set(28);
+database.ref("location/city").set("New York City");
+database.ref("attributes").set({
+  height: "5'9",
+  weight: 184,
+});
