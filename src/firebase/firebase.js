@@ -27,13 +27,7 @@ database.ref().set({
     city: "Spotswood",
     country: "United States",
   },
-  //   attributes: {
-  //     height: "5'9",
-  //     weight: 185,
-  //   },
 });
-
-// database.ref().set("This is my data");
 
 database.ref("age").set(28);
 database.ref("location/city").set("New York City");
