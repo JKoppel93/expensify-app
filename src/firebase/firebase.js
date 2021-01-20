@@ -19,82 +19,46 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const onValueChange = database.ref().on(
-  "value",
-  (snapshot) => {
-    const val = snapshot.val();
-    console.log(val.name, "is a", val.job.title, "at", val.job.company);
-  },
-  (e) => {
-    console.log("Error with data fetching", e);
-  }
-);
+database.ref("expenses").on("child_removed", (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+});
 
-setTimeout(() => {
-  database.ref().update({
-    name: "Jake",
-    "job/title": "Developer",
-    "job/company": "Google",
-  });
-}, 3500);
+database.ref("expenses").on("child_changed", (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+});
 
-setTimeout(() => {
-  database.ref().off("value", onValueChange);
-}, 7000);
-
-setTimeout(() => {
-  database.ref().update({
-    name: "Jake Koppel",
-    "job/title": "Dev",
-    "job/company": "Facebook",
-  });
-}, 10500);
+database.ref("expenses").on("child_added", (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+});
 
 // database
-//   .ref("location/country")
+//   .ref("expenses")
 //   .once("value")
 //   .then((snapshot) => {
-//     const val = snapshot.val();
-//     console.log(val);
-//   })
-//   .catch((e) => {
-//     console.log("Error fetching data", e);
+//     const expenses = [];
+
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val(),
+//       });
+//     });
+//     console.log(expenses);
 //   });
 
-// database
-//   .ref()
-//   .set({
-//     name: "Jacob Koppel",
-//     age: 27,
-//     stressLevel: 6,
-//     job: {
-//       title: "Web Developer",
-//       company: "Freelance",
-//     },
-//     location: {
-//       city: "Spotswood",
-//       country: "United States",
-//     },
-//   })
-//   .then(() => {
-//     console.log("Data is saved!");
-//   })
-//   .catch((e) => {
-//     console.log("This failed.", e);
-//   });
+// database.ref("expenses").on("value", (snapshot) => {
+//   database
+//     .ref("expenses")
+//     .once("value")
+//     .then((snapshot) => {
+//       const expenses = [];
 
-// database.ref().update({
-//   stressLevel: 9,
-//   "job/company": "Amazon",
-//   "location/city": "Seattle",
+//       snapshot.forEach((childSnapshot) => {
+//         expenses.push({
+//           id: childSnapshot.key,
+//           ...childSnapshot.val(),
+//         });
+//       });
+//       console.log(expenses);
+//     });
 // });
-
-// database
-//   .ref()
-//   .remove()
-//   .then(() => {
-//     console.log("Remove succeeded");
-//   })
-//   .catch((e) => {
-//     console.log("Did not remove data", e);
-//   });
