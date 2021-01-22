@@ -1,3 +1,4 @@
+import { set } from "numeral";
 import { v4 as uuidv4 } from "uuid";
 import database from "../firebase/firebase";
 
@@ -53,4 +54,36 @@ export const setExpenses = (expenses) => ({
   expenses,
 });
 
-export const startSetExpenses = null;
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    return database
+      .ref("expenses")
+      .once("value")
+      .then((snapshot) => {
+        const expenses = [];
+
+        snapshot.forEach((childSnapshot) => {
+          expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
+        dispatch(setExpenses(expenses));
+      });
+  };
+};
+
+// database
+//   .ref("expenses")
+//   .once("value")
+//   .then((snapshot) => {
+//     const expenses = [];
+
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val(),
+//       });
+//     });
+//     console.log(expenses);
+//   });
