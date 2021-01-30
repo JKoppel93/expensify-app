@@ -10,13 +10,15 @@ exports[`should render LoginPage 1`] = `
     <h1
       className="layout__title"
     >
-      Expensify App
+      Expensify
     </h1>
     <p>
       It's time to get your expenses under control.
     </p>
-    <button>
-      Login
+    <button
+      className="button"
+    >
+      Login with Google
     </button>
   </div>
 </div>

@@ -85,9 +85,10 @@ module.exports = (env) => {
     devServer: {
       contentBase: path.join(__dirname, "public"),
       historyApiFallback: true,
-      host: "10.0.0.50",
+      host: "0.0.0.0",
       port: "8080",
       publicPath: "/dist/",
+      disableHostCheck: true,
     },
   };
 };
